@@ -6,8 +6,15 @@
     <script src="/static/remote.js"></script>
 </head>
 <body>
-    <button type="button" class="cyclepower" onclick="restGet('/io/c')">Cycle Power</button>
-    <button type="button" class="cyclepower" onclick="restGet('/io/o')">Power Off</button>
-    <button type="button" class="cyclepower" onclick="restGet('/io/i')">Power On</button>
+	<table>
+		<tr>
+			<td><iframe src="http://www.seraphrobotics.com/img/logo.png" width="640" height="480"></iframe></td>
+		</tr>
+		<tr>
+			<td><button type="button" class="cyclepower" onclick="restGet('/io/c')">Cycle Power</button>
+			<button type="button" class="cyclepower" onclick="restGet('/io/o')">Power Off</button>
+			<button type="button" class="cyclepower" onclick="restGet('/io/i')">Power On</button></td>
+	</tr>
+	<table>
 </body>
 </html>
