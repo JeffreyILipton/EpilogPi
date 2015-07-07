@@ -8,9 +8,6 @@ class PowerTailInterface:
         io.setup(self.power_pin,io.OUT)
         io.output(self.power_pin,True) ## set the powertail on by default
         self.on = True
-        
-    def __del__(self):
-        self.ser.close()
 
     def isready(self):
         return self.on
@@ -27,6 +24,6 @@ if __name__ == '__main__':
     while(loopVar):
         val = raw_input('Command:')
         b = (val == "O")
-        ir.write(b)
+        ir.setPower(b)
         if (val == 'Q'):
             loopVar = False

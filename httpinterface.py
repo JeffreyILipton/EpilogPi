@@ -4,7 +4,7 @@ from os import getcwd
 
 
 class HTTPInterface:
-    def __init__(self,port='',baud=0):
+    def __init__(self):
         self.pt = PowerTailInterface();
 
     #@route('/ui')
@@ -17,29 +17,30 @@ class HTTPInterface:
     def io_get(self,letter=''):
         if("c"==letter):
             self.pt.setPower(False)
-            time.sleep(20)
+            time.sleep(1)
             self.pt.setPower(True)
         elif ("o"==letter):
             self.pt.setPower(False)
         elif ("i"==letter):
             self.pt.setPower(True)
-        else
+        else:
             p = self.pt.isready()
-            self.pt.setPower(!p)
+            self.pt.setPower(not p)
 
             
     #@route('/static/<filename:path>')
     def send_static(self,filename):
-        newroot = getcwd().replace("\\","\\\\")+"\\\\"+ "static"
+        newroot = getcwd().replace("\\","\\\\")+"/"+ "static"
         return static_file(filename, root=newroot)
         
 if __name__ == '__main__':
-    ipport = 8080
+    ipport = 80
     ipaddr='0.0.0.0' #'192.168.56.1' #'localhost'
     app = Bottle()
-    httpi = HTTPInterface(comport,baud)
+    httpi = HTTPInterface()
+    app.route('/')(httpi.mainui)
     app.route('/ui')(httpi.mainui)
-    app.route('/io/:letter')(httpi.tv_get)
+    app.route('/io/:letter')(httpi.io_get)
     app.route('/static/<filename:path>')(httpi.send_static)
     
     run(app,host=ipaddr, port=ipport)
